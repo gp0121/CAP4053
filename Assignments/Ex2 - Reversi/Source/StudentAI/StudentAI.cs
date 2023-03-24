@@ -38,12 +38,20 @@ namespace GameAI.GamePlaying
                     move.rank = GetMoveMinimax(GetNextPlayer(player, new_state), new_state, currentDepth + 1, depthLimit).rank;
                 }
 
-                if (best_move == null || move.rank > best_move.rank)
+                if(player == -1)
                 {
-                    best_move = move;
+                    if(best_move == null || move.rank < best_move.rank)
+                    {
+                        best_move = move;
+                    }
+                } else
+                {
+                    if(best_move == null || move.rank > best_move.rank)
+                    {
+                        best_move = move;
+                    }
                 }
             }
-            Console.WriteLine(best_move.row + " " + best_move.column + " " + best_move.rank);
             return best_move;
         }
 
